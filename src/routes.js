@@ -3,6 +3,7 @@ import Login from "pages/Login";
 import Carrinho from "pages/Carrinho";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
+import { UsuarioContext } from "common/context/Usuario";
 
 function Router() {
   const [nome, setNome] = useState("")
@@ -11,13 +12,10 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-          <Login 
-            nome={nome} 
-            setNome={setNome} 
-            saldo={saldo} 
-            setSaldo={setSaldo}
-          />
-        } />
+          <UsuarioContext.Provider value={{nome, setNome, saldo, setSaldo}}>
+            <Login/>
+          </UsuarioContext.Provider> 
+        }/>
         <Route path="feira" element={<Feira />} />
         <Route path="carrinho" element={<Carrinho />} />
       </Routes>
