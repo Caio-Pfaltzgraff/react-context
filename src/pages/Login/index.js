@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 function Login() {
     const navigate = useNavigate();
-    const {nome, setNome, saldo, setSaldo} = useContext(UsuarioContext);
+    const { nome, setNome, saldo, setSaldo } = useContext(UsuarioContext);
     return(
         <Container>
             <Titulo>
@@ -27,7 +27,12 @@ function Login() {
                     }
                 />
             </InputContainer>
-            <Button variant="contained" color="primary" onClick={() => navigate('/feira')}>Avançar</Button>
+            <Button 
+                variant="contained" 
+                color="primary"
+                disabled={nome.length < 3} 
+                onClick={() => navigate('/feira')}
+            >Avançar</Button>
         </Container>
     )
 }
