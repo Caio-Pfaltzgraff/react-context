@@ -22,9 +22,11 @@ function Router() {
             </UsuarioProvider>
         }/>
         <Route path="/carrinho" element={
+          <UsuarioProvider>
             <CarrinhoProvider>
                 <Carrinho />
             </CarrinhoProvider>
+          </UsuarioProvider>
         }/>
       </Routes>
     </BrowserRouter>
