@@ -8,33 +8,19 @@ import { PagamentoProvider } from "common/context/Pagamento";
 
 function Router() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={
-            <UsuarioProvider>
-                <Login />
-            </UsuarioProvider>
-        }/>
-        <Route path="/feira" element={
-            <UsuarioProvider>
-                <CarrinhoProvider>
-                  <PagamentoProvider>
-                    <Feira />
-                  </PagamentoProvider>
-                </CarrinhoProvider>
-            </UsuarioProvider>
-        }/>
-        <Route path="/carrinho" element={
-          <UsuarioProvider>
-            <CarrinhoProvider>
-              <PagamentoProvider>
-                <Carrinho />
-              </PagamentoProvider>
-            </CarrinhoProvider>
-          </UsuarioProvider>
-        }/>
-      </Routes>
-    </BrowserRouter>
+    <UsuarioProvider>
+      <CarrinhoProvider>
+        <PagamentoProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/feira" element={<Feira />} />
+              <Route path="/carrinho" element={<Carrinho />} />
+            </Routes>
+          </BrowserRouter>
+        </PagamentoProvider>
+      </CarrinhoProvider>
+    </UsuarioProvider>
   );
 }
 
