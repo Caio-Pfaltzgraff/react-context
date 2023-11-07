@@ -7,15 +7,18 @@ import {
 import { Button, Snackbar, InputLabel, Alert, Select, MenuItem } from "@mui/material";
 import { useCarrinhoContext } from "common/context/Carrinho";
 import { usePagamentoContext } from "common/context/Pagamento";
+import { UsuarioContext } from "common/context/Usuario";
 import Produto from "components/Produto";
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Carrinho() {
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  const { carrinho, valorTotalCarrinho } = useCarrinhoContext();
+  const { carrinho, valorTotalCarrinho, efetuarCompra } = useCarrinhoContext();
+  const { saldo = 0 } = useContext(UsuarioContext);
   const { formaPagamento, mudarFormaPagamento, tiposPagamento } = usePagamentoContext();
   const navigate = useNavigate();
+  const total = useMemo(() => saldo - valorTotalCarrinho, [saldo, valorTotalCarrinho]); //irá excutar apenas quando o saldo ou valor totalcarrinho mudar
   return (
     <Container>
       <Voltar onClick={() => navigate(-1)}/>
@@ -43,17 +46,19 @@ function Carrinho() {
         </div>
         <div>
           <h2> Saldo: </h2>
-          <span> R$ </span>
+          <span> R$ {Number(saldo).toFixed(2)}</span>
         </div>
         <div>
           <h2> Saldo Total: </h2>
-          <span> R$ </span>
+          <span> R$ {total.toFixed(2)}</span>
         </div>
       </TotalContainer>
       <Button
         onClick={() => {
+          efetuarCompra();
           setOpenSnackBar(true);
         }}
+        disabled={total < 0 || carrinho.length === 0}
         color="primary"
         variant="contained"
       >

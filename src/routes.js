@@ -18,7 +18,9 @@ function Router() {
         <Route path="/feira" element={
             <UsuarioProvider>
                 <CarrinhoProvider>
+                  <PagamentoProvider>
                     <Feira />
+                  </PagamentoProvider>
                 </CarrinhoProvider>
             </UsuarioProvider>
         }/>
