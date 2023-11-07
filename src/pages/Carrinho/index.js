@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 function Carrinho() {
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  const { carrinho } = useCarrinhoContext();
+  const { carrinho, valorTotalCarrinho } = useCarrinhoContext();
   const { formaPagamento, mudarFormaPagamento, tiposPagamento } = usePagamentoContext();
   const navigate = useNavigate();
   return (
@@ -39,7 +39,7 @@ function Carrinho() {
       <TotalContainer>
         <div>
           <h2>Total no Carrinho: </h2>
-          <span>R$ </span>
+          <span>R$ {valorTotalCarrinho.toFixed(2)}</span>
         </div>
         <div>
           <h2> Saldo: </h2>
